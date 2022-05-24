@@ -7,9 +7,17 @@
     <title>FATest</title>
 </head>
 <body>
-    <h1>Test</h1>  
-    <input type="number" name="x-Koordinate" id="x">
-    <input type="number" name="x-Koordinate" id="y">
+    <h1>Test</h1>
+    <input type="number" name="Initial Coordinates" id="initCoord">
+    <input type="number" name="Final Coordinates" id="finalCoord">
+    <input type="number" name="Exchange Coordinates" id="exchangCoord">
     <input type="button" value="Submit">
+    <script>
+
+    var initCoord = document.getElementById("initCoord");
+    var finalCoord = document.getElementById("finalCoord");
+    var exchangCoord = document.getElementById("exchangCoord");
+    var data = {initCoord,finalCoord,exchangCoord};
+    </script>
 </body>
 </html>
