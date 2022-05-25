@@ -18,7 +18,17 @@
     var finalCoord = document.getElementById("finalCoord");
     var exchangCoord = document.getElementById("exchangCoord");
     var data = {initCoord,finalCoord,exchangCoord};
-    console.log (initCoord + finalCoord + exchangCoord);
+    const options = {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    fetch("/api", options).then(response => {
+      console.log(response);
+    });
 
     </script>
 </body>
