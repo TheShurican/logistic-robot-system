@@ -1,0 +1,22 @@
+{
+  "name": "logistic-robot-system",
+  "version": "1.0.0",
+  "description": "Building a system where two robots collaborate to fulfill a transportation order",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheShurican/logistic-robot-system.github.io.git"
+  },
+  "author": "Linus Vathröder, Felix Müller-Volbehr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheShurican/logistic-robot-system.github.io/issues"
+  },
+  "homepage": "https://github.com/TheShurican/logistic-robot-system.github.io#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}

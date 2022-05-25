@@ -1,7 +1,4 @@
-http = require("http");
-
-http.createServer(function (req,res){
-
-  res.write("Hello World!");
-  res.end();
-}).listen(8080);
+const express = require("express");
+const app = express();
+app.listen(3000, () => console.log("listening"));
+app.use(express.static("public"));
