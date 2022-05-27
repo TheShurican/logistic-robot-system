@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Input the coordinates</h1>
-    <form id = "" onsubmit= "return mySubmitFunction(event)">
+    <form id = "" onsubmit= "return submitFunction(event)">
       <label for="start_Coords">Start Coordinates</label>
       <input type="number" id="start_Coords"required>
       <br>
@@ -31,7 +31,7 @@
       console.log(data);
     }
 
-    function mySubmitFunction(e) {
+    function submitFunction(e) {
       e.preventDefault();
       const options = {
           method: "POST",
