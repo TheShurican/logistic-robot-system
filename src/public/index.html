@@ -7,28 +7,47 @@
     <title>Logistic Robot System - LRS</title>
 </head>
 <body>
-    <h1>Test</h1>
-    <input type="number" name="Initial Coordinates" id="initCoord">
-    <input type="number" name="Final Coordinates" id="finalCoord">
-    <input type="number" name="Exchange Coordinates" id="exchangCoord">
-    <input type="button" value="Submit">
+    <h1>Input the coordinates</h1>
+    <form id = "" onsubmit= "return mySubmitFunction(event)">
+      <label for="start_Coords">Start Coordinates</label>
+      <input type="number" id="start_Coords"required>
+      <br>
+      <label for="exchange_Coords">Exchange Coordinates</label>
+      <input type="number" id = "exchange_Coords"required>
+      <br>
+      <label for="final_Coords">Final Coordinates</label>
+      <input type="number" id = "final_Coords"required>
+      <br>
+      <input type="submit" value="Send Coordinates" onclick="getData()">
+    </form>
     <script>
 
-    var initCoord = document.getElementById("initCoord");
-    var finalCoord = document.getElementById("finalCoord");
-    var exchangCoord = document.getElementById("exchangCoord");
-    var data = {initCoord,finalCoord,exchangCoord};
-    const options = {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+    let data = {};
+    function getData(){
+      start_value = document.getElementById("start_Coords").value;
+      exchange_value = document.getElementById("exchange_Coords").value;
+      final_value = document.getElementById("final_Coords").value;
+       data = {start_value, exchange_value, final_value};
+      console.log(data);
     }
 
-    fetch("/api", options).then(response => {
-      console.log(response);
-    });
+    function mySubmitFunction(e) {
+      e.preventDefault();
+      const options = {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+      }
+
+      fetch("/api", options).then(response => {
+        console.log(response);
+      });
+      return false;
+    }
+
+
 
     </script>
 </body>
