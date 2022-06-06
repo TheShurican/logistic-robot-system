@@ -4,6 +4,8 @@ const math = require("mathjs");
 app.listen(3000, () => console.log("listening"));
 app.use(express.static("public"));
 app.use(express.json() );
+let pickUpRobot; // 0 for Tugger, 1 for bmw
+let exchangeRobot; //0 for Tugger, 1 for bmw
 
 let userData = {}; //get startCoords, exchangeCoords & finalCoords;
 let tuggerTrainData = {}; //get Coords of tugger robot
@@ -39,7 +41,7 @@ function computeDistances(coordinates){
   };
   return distances;
 }
-function timeEstimation(distances,v_tugger_max,v_bmw_max){
+function timeEstimation(distances){
   //might need unit conversions
   let times = {
   tugger_to_start:  distances.tugger_to_start / v_tugger_max,
@@ -50,4 +52,25 @@ function timeEstimation(distances,v_tugger_max,v_bmw_max){
   bmw_to_exchange: distances.bmw_to_exchange / v_bmw_max
   }
   return times
+}
+function pickVehicle(times){ //only the most basic solution for pick up decision making, needs improvement
+  if (times.tugger_to_start < times.bmw_to_start) {
+    console.log("Tugger train to pick up order");
+    pickUpRobot = 0;
+    exchangeRobot = 1;
+  }else if (times.tugger_to_start > times.bmw_to_start) {
+    console.log("BMW robot to pick up order");
+    pickUpRobot = 1;
+    exchangeRobot = 0;
+  }else if(times.tugger_to_start == times.bmw_to_start){
+    console.log("Picking Random Robot");
+    pickUpRobot = 1;
+    exchangeRobot = 0;
+  }
+}
+function computationProcess(userData,tuggerTrainData,bmwData){
+  coordinates = getCoordinates(userData,tuggerTrainData,bmwData);
+  distances = computeDistances(coordinates);
+  times = timeEstimation(distances);
+  pickVehicle(times);
 }
