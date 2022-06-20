@@ -4,6 +4,8 @@ const math = require("mathjs");
 app.listen(3000, () => console.log("listening"));
 app.use(express.static("public"));
 app.use(express.json() );
+
+
 let pickUpRobot; // 0 for Tugger, 1 for bmw
 let exchangeRobot; //0 for Tugger, 1 for bmw
 
@@ -30,7 +32,8 @@ function getCoordinates(userData,tuggerTrainData,bmwData){
   return coordinates;
 }
 function computeDistances(coordinates){
-   //compute Distances between each robot and start point and each robot and exchange point; next_step: retrieving distance estimation from robot as well -> more precise;
+   //compute Distances between each robot and start point and each robot and exchange point; next_step: retrieving distance estimation from robot as well -> more precise (Update: not possible)
+   //Instead we will compute the distances using A* or Dijkstra; issue -> will only output path coordinates not distance (Distance computation can become costly)
   let distances = {
     tugger_to_start:  math.distance(coordinates.startCoords, coordinates.tuggerTrainCoords),
     bmw_to_start:  math.distance(coordinates.startCoords, coordinates.bmwCoords),
@@ -73,4 +76,10 @@ function computationProcess(userData,tuggerTrainData,bmwData){
   distances = computeDistances(coordinates);
   times = timeEstimation(distances);
   pickVehicle(times);
+  let cache = {
+    coordinates: coordinates,
+    distances: distances,
+    times: times,
+  }
+  return cache
 }
